@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "2b6f22dd-4e44-450f-aa4c-d1c87b96e31a",
+		"name": "Reservatio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Availabilities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/reservatio/v1/bookings?fromDate=2021-05-10&toDate=2021-05-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"reservatio",
+						"v1",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2021-05-10"
+						},
+						{
+							"key": "toDate",
+							"value": "2021-05-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"email@gmail.com\",\n    \"firstName\": \"firstname\",\n    \"lastName\": \"vallipuram\",\n    \"startDate\": \"2021-05-13\",\n    \"endDate\": \"2021-05-16\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/reservatio/v1/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"reservatio",
+						"v1",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Booking",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uuid\": \"replace uuid\",\n    \"firstName\": \"update_first_name\",\n    \"lastName\": \"update_last_name\",\n    \"startDate\": \"2021-05-23\",\n    \"endDate\": \"2021-05-26\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/reservatio/v1/bookings/change",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"reservatio",
+						"v1",
+						"bookings",
+						"change"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/reservatio/v1/bookings?uuid=<uuid replace>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"reservatio",
+						"v1",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "<uuid replace>"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
