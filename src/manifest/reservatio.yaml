@@ -1,0 +1,78 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: reservatio
+spec:
+  type: LoadBalancer
+  selector:
+    app: reservatio
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservatio
+  labels:
+    app: reservatio
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: reservatio
+  template:
+    metadata:
+      labels:
+        app: reservatio
+    spec:
+      volumes:
+        - name: application-conf
+          configMap:
+            name: reservatio-config
+      containers:
+        - name: reservatio
+          image: pirasath.vallipuram/back-end_reservatio:0.1
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 45
+            timeoutSeconds: 2
+          volumeMounts:
+            - name: application-conf
+              mountPath: /config
+          env:
+            - name: JAVA_OPTS
+              value: "-server -Xms368m -Xmx368m -XX:MaxMetaspaceSize=96m -Dconfig.file=/config/application.conf"
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reservatio-config
+data:
+  application.conf: |-
+    db.default.url      = "jdbc:mysql://mysql:3306/reservatio?useSSL=false&createDatabaseIfNotExist=true"
+    db.default.user     = "root"
+    db.default.password = "password"
