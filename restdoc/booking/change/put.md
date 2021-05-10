@@ -1,4 +1,4 @@
-# Update sftp settings password
+# Update reservation 
 
 **URL** : `/api/reservatio/v1/bookings/change`
 
@@ -37,5 +37,5 @@ Change an existing booked reservation
 **Code** : `400 Bad Request`
 
 **Content** : `The request content was malformed:
-               No usable value for partner
+               No usable value for email
                Did not find value which can be converted into java.lang.String`

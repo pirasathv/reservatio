@@ -1,4 +1,4 @@
-# Show sftp settings
+# Show available dates
 
 **URL** : `/api/reservatio/v1/bookings`
 

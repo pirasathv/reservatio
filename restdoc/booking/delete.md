@@ -1,4 +1,4 @@
-# Delete sftp settings
+# Delete booked reservation
 
 **URL** : `/api/reservatio/v1/bookings`
 
